@@ -76,12 +76,6 @@ public class Vuelo {
         this.tiempo_minutos = tiempo_minutos;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
     /*@Override
     public boolean equals(Object obj) {
         if (this == obj) {
