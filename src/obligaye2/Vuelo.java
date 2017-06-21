@@ -5,67 +5,51 @@
  */
 package obligaye2;
 
+import java.util.Objects;
+
 /**
  *
  * @author Camila Ferreira y Sebastián Rodríguez
  */
 public class Vuelo {
     
-    private Double coordXi;
+    /*private Double coordXi;
     private Double coordYi;
     private Double coordXf;
-    private Double coordYf;
+    private Double coordYf;*/
+    private Ciudad cOrigen;
+    private Ciudad cDestino;
     private int capacidad_paquetes;
     private int costo;
     private int tiempo_minutos;
 
-    public Vuelo(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
-        this.coordXi = coordXi;
-        this.coordYi = coordYi;
-        this.coordXf = coordXf;
-        this.coordYf = coordYf;
+    public Vuelo(Ciudad cOrigen, Ciudad cDestino) {
+        this.cOrigen = cOrigen;
+        this.cDestino = cDestino;
     }
-    
-    public Vuelo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int capacidad_paquetes, int costo, int tiempo_minutos) {
-        this.coordXi = coordXi;
-        this.coordYi = coordYi;
-        this.coordXf = coordXf;
-        this.coordYf = coordYf;
+
+    public Vuelo(Ciudad cOrigen, Ciudad cDestino, int capacidad_paquetes, int costo, int tiempo_minutos) {
+        this.cOrigen = cOrigen;
+        this.cDestino = cDestino;
         this.capacidad_paquetes = capacidad_paquetes;
         this.costo = costo;
         this.tiempo_minutos = tiempo_minutos;
     }
 
-    public Double getCoordXi() {
-        return coordXi;
+    public Ciudad getcOrigen() {
+        return cOrigen;
     }
 
-    public void setCoordXi(Double coordXi) {
-        this.coordXi = coordXi;
+    public void setcOrigen(Ciudad cOrigen) {
+        this.cOrigen = cOrigen;
     }
 
-    public Double getCoordYi() {
-        return coordYi;
+    public Ciudad getcDestino() {
+        return cDestino;
     }
 
-    public void setCoordYi(Double coordYi) {
-        this.coordYi = coordYi;
-    }
-
-    public Double getCoordXf() {
-        return coordXf;
-    }
-
-    public void setCoordXf(Double coordXf) {
-        this.coordXf = coordXf;
-    }
-
-    public Double getCoordYf() {
-        return coordYf;
-    }
-
-    public void setCoordYf(Double coordYf) {
-        this.coordYf = coordYf;
+    public void setcDestino(Ciudad cDestino) {
+        this.cDestino = cDestino;
     }
 
     public int getCapacidad_paquetes() {
@@ -91,20 +75,32 @@ public class Vuelo {
     public void setTiempo_minutos(int tiempo_minutos) {
         this.tiempo_minutos = tiempo_minutos;
     }
-    
+
     @Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Vuelo other = (Vuelo) obj;
-		if ((coordXi != other.coordXi && coordYi != other.coordYi) && 
-                        (coordXf != other.coordXf && coordYf != other.coordYf))
-			return false;
-		return true;
-	}
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    /*@Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vuelo other = (Vuelo) obj;
+        if (!Objects.equals(this.cOrigen, other.cOrigen)) {
+            return false;
+        }
+        if (!Objects.equals(this.cDestino, other.cDestino)) {
+            return false;
+        }
+        return true;
+    }*/    
     
 }

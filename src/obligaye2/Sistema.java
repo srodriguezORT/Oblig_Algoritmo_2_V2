@@ -2,9 +2,8 @@ package obligaye2;
 
 import java.awt.Desktop;
 import java.net.URI;
-import obligaye2.ISistema;
+import java.net.URL;
 import obligaye2.TipoRetorno.TipoError;
-
 
 public class Sistema implements ISistema {
     
@@ -107,7 +106,7 @@ public class Sistema implements ISistema {
 		
             Ciudad auxO = new Ciudad(coordXi, coordYi);
             Ciudad auxD = new Ciudad(coordXf, coordYf);
-            Vuelo auxV = new Vuelo(coordXi, coordYi, coordXf, coordYf);
+            Vuelo auxV = new Vuelo(auxO, auxD);
             if(capacidad_paquetes <= 0){
                 return new TipoRetorno(TipoError.ERROR_1);
             }else if(costo <= 0){
@@ -120,7 +119,7 @@ public class Sistema implements ISistema {
                 return new TipoRetorno(TipoError.ERROR_5);
             }
             
-            vuelos.agregarFin(new Vuelo(coordXi, coordYi, coordXf, coordYf, capacidad_paquetes, costo, tiempo_minutos));
+            vuelos.agregarFin(new Vuelo(auxO, auxD, capacidad_paquetes, costo, tiempo_minutos));
             return new TipoRetorno(TipoError.OK);
             
 	}
@@ -190,11 +189,10 @@ public class Sistema implements ISistema {
                 return new TipoRetorno(TipoError.ERROR_2);
             }else if(clientes.buscar(auxCli).pendientesEnvio() < cant_paquetes){
                 return new TipoRetorno(TipoError.ERROR_3);
-            }//else if(){
-                //return new TipoRetorno(TipoError.ERROR_4);
-            //}
-            
-            return new TipoRetorno(TipoError.OK);
+            }else{
+                //return g.hayRutaPedidoUrgente(cO, cD);
+            } 
+            return new TipoRetorno(cedula);
 	}
 
 	@Override
@@ -217,22 +215,24 @@ public class Sistema implements ISistema {
 	@Override
 	public TipoRetorno mapaEstado() {
             
-        /*    String cities = "";
-                for (Ciudad x : ciudades) {
-            
-                   cities += x.getNombre() +"|";
+            String cities = "";
+                for (Ciudad x : ciudades) {            
+                   cities += x.getCoordX()+","+ x.getCoordY()+"|";
             }
-            //cities = cities.substring(0, cities.length()-2)
-		String URL = 
-         "https://maps.googleapis.com/maps/api/staticmap?center=Australia&size=640x400&style=element:labels|"
-                        + "visibility:off&style=element:geometry.stroke|visibility:off&style=feature:landscape|"
-                        + "element:geometry|saturation:-100&style=feature:water|saturation:-100|"
-                        + "invert_lightness:true&key=AIzaSyDhfTvXeR1_KtzXelJWoMu64w9RaZ7bmE8";
-          */      
+            cities = cities.substring(0, cities.length()-2);
+         
+        String URL
+                = "https://maps.googleapis.com/maps/api/staticmap?center=Colombia&size=1024x600&zoom=3&maptype=roadmap&"
+                + "markers=color:red%7Clabel:C%7C|"+cities
+                + "&key=AIzaSyDhfTvXeR1_KtzXelJWoMu64w9RaZ7bmE8";
+
                 try {
+
+            URL url = new URL(URL);
+            URI uri = new URI(url.getProtocol(), url.getHost(), url.getPath(), url.getQuery(), null);
+
                 Desktop desktop = java.awt.Desktop.getDesktop();
-                URI laURL = new URI("http://www.google.com");
-                desktop.browse(laURL);
+            desktop.browse(uri);
                 
             } catch (Exception e) {
                 e.printStackTrace();
